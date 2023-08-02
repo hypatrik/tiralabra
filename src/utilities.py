@@ -1,12 +1,10 @@
-"""
-Apufunktiota
-"""
+"""Apufunktiota."""
 
 def split_every(n, lst):
     """
-    Jaetaan lista n kokoisiin alilistoihin
+    Jaetaan lista n kokoisiin alilistoihin.
 
-    Parametrit:
+    Args:
         n (int): Alilistan koko.
         lst (list): Jaettava lista.
 
