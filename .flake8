@@ -9,13 +9,13 @@ max-line-length = 120
 exclude = .git,__pycache__,venv,src/test_*
 
 # Show source code for each error, if available
-show-source = true
+show-source = True
 
 # Enable statistics summary after running flake8
-statistics = true
+statistics = True
 
 # Count the number of occurrences of each error/warning code
-count = true
+count = True
 
 # Enable the flake8-docstrings plugin
 enable-extensions = D
