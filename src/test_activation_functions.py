@@ -1,7 +1,7 @@
 import numpy as np
 
 from activation_funtions import step, relu, sigmoid
-from test_utils import assertAlmostEqual
+from testing_utils import assertAlmostEqual
 
 test_set = np.array([-5, -2, -1, 0, 1, 2, 5])
 
@@ -19,7 +19,7 @@ def test_relu():
         assert result[i] == 0
     for i in range(4, len(test_set)):
         assert result[i] == test_set[i]
-    
+
 def test_sigmoid():
     result = sigmoid(np.array([0, 1, -1, 100, -100]))
     # Sigmoid-funktion ominaisuus: 0 on keskellä
