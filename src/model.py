@@ -101,8 +101,8 @@ class NeuralNetwork:
         """
         # Feedforward, lasketaan aktivoinnit. Lasketaan z^1 = w^l * a^l−1 + b^l ja a^l=σ(z^l).
         # Aloitetaan ensimmäisestä kerroksesta
-        a_vectors = [np.zeros(b.shape) for b in self.biases[::-1]]
-        z_vectors = [np.zeros(w.shape) for w in self.weights[::-1]]
+        a_vectors = [np.zeros(b.shape) for b in self.biases]
+        z_vectors = [np.zeros(w.shape) for w in self.weights]
 
         for b, w in zip(self.biases, self.weights):
             z = np.dot(w, a_vectors[-1]) + b
@@ -125,14 +125,14 @@ class NeuralNetwork:
 
         # Lasketaan seuraavat kerrokset, kuljetaan takaperin
         # δ^l = ((w^l+1)^T * δ^l+1) ⊙ σ′(z^l)
-        for l in range(1, self.n_layers - 1, -1):
+        for l in range(2, self.n_layers):
             delta = np.dot(
-                self.weights[l - 1].transpose(), delta
-            ) * self.activation_function_derivative(z_vectors[l])
-            delta_weights.append(np.dot(delta, a_vectors[l + 1].transpose()))
+                self.weights[l + 1].transpose(), delta
+            ) * self.activation_function_derivative(z_vectors[-l])
+            delta_weights.append(np.dot(delta, a_vectors[l - 1].transpose()))
             delta_biases.append(delta)
 
-        return (delta_weights[::-1], delta_biases[::-1])
+        return (delta_weights, delta_biases)
 
     def feedforward(self, a):
         for b, w in zip(self.biases, self.weights):
