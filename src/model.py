@@ -101,8 +101,9 @@ class NeuralNetwork:
         """
         # Feedforward, lasketaan aktivoinnit. Lasketaan z^1 = w^l * a^l−1 + b^l ja a^l=σ(z^l).
         # Aloitetaan ensimmäisestä kerroksesta
-        a_vectors = [x]
-        z_vectors = []
+        a_vectors = [np.zeros(b.shape) for b in self.biases[::-1]]
+        z_vectors = [np.zeros(w.shape) for w in self.weights[::-1]]
+
         for b, w in zip(self.biases, self.weights):
             z = np.dot(w, a_vectors[-1]) + b
             z_vectors.append(z)
