@@ -29,5 +29,6 @@ Projektin dokumentaatio mukaan lukien koodikommentit tullaan kirjoittamaan suome
 
 Projektissa aion käyttää seuraavia lähteitä apuna:
 
+1. https://tim.jyu.fi/view/143092#lis%C3%A4tietoa-aktivointifunktioista
 1. Neural Networks and Deep Learning (Michael A. Nielsen, 2015)
 1. Andrej Karpathy Youtube luennot.
