@@ -20,19 +20,30 @@ class NeuralNetwork:
             update_fn=update_fn_factory(backpropagation_fn=backpropagation_fn)
         )
 
-    def fit(self, X, y, epochs=30, learning_rate=100, batch_size=100):
-        w, b = self.sgd(
+    def fit(
+        self, X_train, y_train, X_val=[], y_val=[], epochs=30, learning_rate=5.0, batch_size=100
+    ):
+        sgd = self.sgd(
             self.weights,
             self.biases,
-            X,
-            y,
+            X_train,
+            y_train,
             epochs=epochs,
             learning_rate=learning_rate,
             batch_size=batch_size,
         )
+        
+        # stokastine gradientti menetelmä palauttaa generaattorin, joilloin päästään
+        # väliin tekemään evaluointi
+        for w, b, epoch in sgd:
+            self.weights = w
+            self.biases = b
+            print('Epoch {} done'.format(epoch))
+            
+            # Evaluoidaan mallin tarkkuus jokaisen epoch jälkeen
+            correct_predictions_count = np.sum([self.predict(x)[0] == y for x, y in zip(X_val, y_val)])
+            print("Predicted {}/{}".format(correct_predictions_count, len(X_val)))
 
-        self.weights = w
-        self.biases = b
 
     def predict(self, x):
         y = self.feedforward(x)
@@ -45,3 +56,4 @@ class NeuralNetwork:
         for b, w in zip(self.biases, self.weights):
             a = sigmoid(calculate_z(a, w, b))
         return a
+    
