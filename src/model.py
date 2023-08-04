@@ -1,4 +1,3 @@
-import random
 import numpy as np
 from activation_funtions import sigmoid
 
@@ -23,13 +22,17 @@ class NeuralNetwork:
             learning_rate=learning_rate,
             batch_size=batch_size,
         )
-        
+
         self.weights = w
         self.biases = b
 
     def predict(self, x):
         y = self.feedforward(x)
-        return np.argmax(y), y
+        prediction = np.argmax(y)
+
+        confidence = np.round(y, 3)[prediction]
+
+        return prediction, confidence[0], y
 
     def feedforward(self, a):
         for b, w in zip(self.biases, self.weights):

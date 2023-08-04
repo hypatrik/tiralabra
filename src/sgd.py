@@ -44,7 +44,7 @@ def stochastic_gradient_descent(
     for i in range(epochs):
         random.shuffle(training_data)
         for batch in split_every(batch_size, training_data):
-            update_fn(weights, biases, batch, learning_rate)
+            weights, biases = update_fn(weights, biases, batch, learning_rate)
         print("epoch {} done".format(i))
 
     return weights, biases
