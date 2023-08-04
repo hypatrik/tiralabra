@@ -2,9 +2,10 @@ import random
 import numpy as np
 
 from utilities import split_every, zero_weight_and_bias_vectors
-from backpropagation import backpropagation
+from backpropagation import backpropagation_fn_factory
 
-def update(weights, biases, batch, learning_rate, backpropagation_fn=backpropagation):
+def update_fn_factory(backpropagation_fn=backpropagation_fn_factory()):
+    def update(weights, biases, batch, learning_rate):
         weight_gradients, bias_gradients = zero_weight_and_bias_vectors(weights, biases)
         
         batch_size = len(batch)
@@ -35,16 +36,19 @@ def update(weights, biases, batch, learning_rate, backpropagation_fn=backpropaga
         # Python funktion otsakkeen muuttujat ovat aina viittauksia.
         return weights, biases
 
+    return update
 
-def stochastic_gradient_descent(
-    weights, biases, X, y, epochs=30, learning_rate=10, batch_size=100, update_fn=update
-):
-    training_data = list(zip(X, y))
+def stochastic_gradient_descent_fn(update_fn=update_fn_factory()):
+    def stochastic_gradient_descent(
+        weights, biases, X, y, epochs=30, learning_rate=10, batch_size=100
+    ):
+        training_data = list(zip(X, y))
 
-    for i in range(epochs):
-        random.shuffle(training_data)
-        for batch in split_every(batch_size, training_data):
-            weights, biases = update_fn(weights, biases, batch, learning_rate)
-        print("epoch {} done".format(i))
+        for i in range(epochs):
+            random.shuffle(training_data)
+            for batch in split_every(batch_size, training_data):
+                weights, biases = update_fn(weights, biases, batch, learning_rate)
+            print("epoch {} done".format(i))
 
-    return weights, biases
+        return weights, biases
+    return stochastic_gradient_descent
