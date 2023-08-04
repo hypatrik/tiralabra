@@ -36,10 +36,9 @@ def backpropagation_fn_factory(
         # Nyt koska painojen ja vakioiden alustuksessa jätettiin syötekerroksesta pois
         # nähdään, että lasketaan z-vektorit ensimmäisestä piilokerroksesta
         for w, b in zip(weights, biases):
-            z = calculate_z(a, w, b)
+            z = calculate_z(a_vectors[-1], w, b)
             z_vectors.append(z)
-            a = activation_function(z)
-            a_vectors.append(a)
+            a_vectors.append(activation_function(z))
         # Nyt on laskettu aktivoinnit tasoille 0...L ja z-vektorit tasoille 1...L
 
         # Backpropagation
