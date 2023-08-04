@@ -10,5 +10,5 @@ lint:
 	poetry run flake8 $(SRC_DIR)/*.py
 
 test:
-	poetry run coverage run -m pytest src/*.py
+	poetry run coverage run -m pytest src/test_*.py
 	coverage report --show-missing

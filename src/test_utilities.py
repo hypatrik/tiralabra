@@ -4,6 +4,7 @@ def test_split_every_one_element():
     test_set = [1, 2, 3, 4, 5]
     result = [[1], [2], [3], [4], [5]]
     assert split_every(1, test_set) == result
+    assert test_set == [1, 2, 3, 4, 5]
 
 def test_split_every_two_elements():
     test_set = [1, 2, 3, 4, 5, 6]

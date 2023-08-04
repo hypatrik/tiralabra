@@ -61,7 +61,8 @@ def sigmoid_derivative(x):
     Args:
         x (numpy array)
     """
-    return sigmoid(x) * (1 - sigmoid(x))
+    v = sigmoid(x)
+    return v * (1 - v)
 
 
 def activation_function_factory(function_name):
