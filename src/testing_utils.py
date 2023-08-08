@@ -5,7 +5,6 @@ import numpy as np
 def assertAlmostEqual(x, y, digits=7):
     """
     Testaa onko kaksi numeerista arvoa liittävän lähellä toisiaan.
-
     Args:
         x (numeric / numpy lista)
         y (numeric / numpy list)

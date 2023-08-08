@@ -19,8 +19,8 @@ def split_every(n, lst):
 
 def zero_weight_and_bias_vectors(weights, biases):
     return (
-        [np.zeros(w.shape) for w in weights],
-        [np.zeros(b.shape) for b in biases],
+        [np.zeros_like(w) for w in weights],
+        [np.zeros_like(b) for b in biases],
     )
 
 def init_weights_and_biases(layers):
