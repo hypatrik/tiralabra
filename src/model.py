@@ -72,6 +72,8 @@ class NeuralNetwork:
             batch_size=batch_size,
         )
 
+
+        evaluations = []
         # stokastine gradientti menetelmä palauttaa generaattorin, joilloin päästään
         # väliin tekemään evaluointi
         for w, b, epoch in sgd:
@@ -84,6 +86,10 @@ class NeuralNetwork:
                 [self.predict(x)[0] == y for x, y in zip(X_val, y_val)]
             )
             print("Predicted {}/{}".format(correct_predictions_count, len(X_val)))
+            
+            evaluations.append(correct_predictions_count / len(X_val))
+            
+        return evaluations
 
     def predict(self, x):
         """

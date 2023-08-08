@@ -38,8 +38,7 @@ def backpropagation_fn_factory(
         # Feedforward osa
         # Ensimmäinen aktivointi on input vektori.
         # Huomaa, että a vektorit on kaikille L tasolle
-        a = x
-        a_vectors = [a]
+        a_vectors = [x]
         # Kun taas z vektorit lasketaan 1...L kerroksille (syötekerros 0)
         z_vectors = []
 
@@ -60,15 +59,16 @@ def backpropagation_fn_factory(
         )
 
         # Lasketaan virhe viimeiselle kerrokselle δ^L = ∇aC ⊙ σ′(z^L)
+                
         error = cost_function_derivative(a_vectors[-1], y)
-        delta = error * activation_function_derivative(z[-1])
+        delta = error * activation_function_derivative(z_vectors[-1])
 
         # https://tim.jyu.fi/view/143092#osittaisderivaatat-vakiotermien-bl_j-suhteen
         # https://tim.jyu.fi/view/143092#osittaisderivaatat-piilokerroksen-painojen-w_ijl-suhteen
         gradients_weights[-1] = np.dot(delta, a_vectors[-2].transpose())
         gradients_bias[-1] = delta
 
-        # l kerrokselle δ^l = ((w^l+1)^T * δ^l+1) ⊙ σ′(z^L)
+        # l kerrokselle δ^l = ((w^l+1)^T * δ^l+1) ⊙ σ′(z^l)
         # Nyt on hyvä huomata taas, että a on 0...L ja z on 1...L.
         # ja L taso on jo laskettu, joten haluamme laskea gradientit 1...L-1
         # Jos ||L|| = 4, niin z-vektorin koko on 3 (indeksit 0, 1 ja 2). Koska 2 on jo laskettu
@@ -77,9 +77,11 @@ def backpropagation_fn_factory(
         # Koska gradientit, painot, vakiot ja aktivoinnit ovat eri kokoisia,
         # ne ovat kuitenkin takaperin katsottuna samassa järjestyksessä.
         for layer in range(2, len(weights) + 1):
+            z = z_vectors[-layer]
+            activation_derivative_value = activation_function_derivative(z)
             delta = np.dot(
                 weights[-layer + 1].transpose(), delta
-            ) * activation_function_derivative(z_vectors[-layer])
+            ) * activation_derivative_value
             gradients_bias[-layer] = delta
             gradients_weights[-layer] = np.dot(delta, a_vectors[-layer - 1].transpose())
 
