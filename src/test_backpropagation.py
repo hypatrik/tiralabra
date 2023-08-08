@@ -28,7 +28,6 @@ def test_backpropagation_shapes():
     for gb, b in zip(gradients_bias, biases):
         assert gb.shape == b.shape
 
-    # Test that the gradients are numpy arrays
     for gw in gradients_weights:
         assert isinstance(gw, np.ndarray)
 
