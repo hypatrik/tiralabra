@@ -8,14 +8,13 @@ injektoida. Näin yksikkötestaaminen helpottuu.
 """
 import numpy as np
 
-from activation_funtions import sigmoid, sigmoid_derivative
 from cost_functions import quadratic_cost_function_derivative
 from utilities import calculate_z, zero_weight_and_bias_vectors
 
 
 def backpropagation_fn_factory(
-    activation_function=sigmoid,
-    activation_function_derivative=sigmoid_derivative,
+    activation_function,
+    activation_function_derivative,
     cost_function_derivative=quadratic_cost_function_derivative,
 ):
     """

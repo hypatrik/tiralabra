@@ -14,10 +14,9 @@ injektoida. Näin yksikkötestaaminen helpottuu.
 import random
 
 from utilities import split_every, zero_weight_and_bias_vectors
-from backpropagation import backpropagation_fn_factory
 
 
-def update_fn_factory(backpropagation_fn=backpropagation_fn_factory()):
+def update_fn_factory(backpropagation_fn):
     """Gradienttimenetelmän painojen ja vakioiden päivitysfunktion tehdas.
 
     Args:
@@ -68,7 +67,7 @@ def update_fn_factory(backpropagation_fn=backpropagation_fn_factory()):
 
 
 def stochastic_gradient_descent_fn(
-    update_fn=update_fn_factory(),
+    update_fn,
 ):
     """Stokastisen gradienttimenetelmän tehdas.
 

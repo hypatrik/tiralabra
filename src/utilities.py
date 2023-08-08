@@ -46,9 +46,13 @@ def init_weights_and_biases(layers):
     Args:
         layers (list)
     """
-    biases = [np.random.randn(n_neurons, 1) for n_neurons in layers[1:]]
+
+    # Huomasin, että saan parempi tuloksia, kun alustan verkon skaalatulla
+    # normaalijakuamalla. Tässä normaaljakaumsta saadut satunnaislukuvektorit kerrotaan
+    # np.sqrt(2.0) / n_neurons. Esimerkiksi Leaky ReLU funktio ei juuri toiminus ilman tätä.
+    biases = [np.random.randn(n_neurons, 1) * np.sqrt(2.0) / n_neurons for n_neurons in layers[1:]]
     weights = [
-        np.random.randn(n_neurons, n_neurons_prev_layer)
+        np.random.randn(n_neurons, n_neurons_prev_layer) * np.sqrt(2.0) / n_neurons
         for n_neurons, n_neurons_prev_layer in zip(layers[1:], layers[:-1])
     ]
 

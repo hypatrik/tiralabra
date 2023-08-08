@@ -1,7 +1,7 @@
 """Neuroverkko."""
 
 import numpy as np
-from activation_funtions import activation_function_factory, sigmoid
+from activation_funtions import activation_function_factory
 
 from sgd import stochastic_gradient_descent_fn, update_fn_factory
 from backpropagation import backpropagation_fn_factory
@@ -34,6 +34,7 @@ class NeuralNetwork:
         self.weights = weights
         self.biases = biases
         af, afd = activation_function_factory(activation_function)
+        self.activation_function = af
         backpropagation_fn = backpropagation_fn_factory(
             activation_function=af, activation_function_derivative=afd
         )
@@ -113,5 +114,5 @@ class NeuralNetwork:
 
     def _feedforward(self, a):
         for b, w in zip(self.biases, self.weights):
-            a = sigmoid(calculate_z(a, w, b))
+            a = self.activation_function(calculate_z(a, w, b))
         return a
