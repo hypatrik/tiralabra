@@ -4,10 +4,15 @@ from backpropagation import backpropagation_fn_factory
 
 # Luodaan backpropagation funktio yksinkertaisemmalla aktivoinnilla
 # helpottaaksemme testaamista
+
+class IdentityActivation:
+    def activation(self, x):
+        return x
+    def derivative(self, x):
+        return np.ones_like(x)
+
 backpropagation = backpropagation_fn_factory(
-    activation_function=lambda x: x,
-    activation_function_derivative=lambda x: np.ones_like(x),
-)
+    activation_function=IdentityActivation())
 
 def test_backpropagation_shapes():
     weights = [np.array([[0.1, 0.2, 0.3], [0.1, 0.2, 0.3]]), np.array([[0.1, 0.2]])]

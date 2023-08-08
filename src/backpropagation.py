@@ -14,7 +14,6 @@ from utilities import calculate_z, zero_weight_and_bias_vectors
 
 def backpropagation_fn_factory(
     activation_function,
-    activation_function_derivative,
     cost_function_derivative=quadratic_cost_function_derivative,
 ):
     """
@@ -46,7 +45,7 @@ def backpropagation_fn_factory(
         for w, b in zip(weights, biases):
             z = calculate_z(a_vectors[-1], w, b)
             z_vectors.append(z)
-            a_vectors.append(activation_function(z))
+            a_vectors.append(activation_function.activation(z))
         # Nyt on laskettu aktivoinnit tasoille 0...L ja z-vektorit tasoille 1...L
 
         # Backpropagation
@@ -60,7 +59,7 @@ def backpropagation_fn_factory(
         # Lasketaan virhe viimeiselle kerrokselle δ^L = ∇aC ⊙ σ′(z^L)
                 
         error = cost_function_derivative(a_vectors[-1], y)
-        delta = error * activation_function_derivative(z_vectors[-1])
+        delta = error * activation_function.derivative(z_vectors[-1])
 
         # https://tim.jyu.fi/view/143092#osittaisderivaatat-vakiotermien-bl_j-suhteen
         # https://tim.jyu.fi/view/143092#osittaisderivaatat-piilokerroksen-painojen-w_ijl-suhteen
@@ -77,7 +76,7 @@ def backpropagation_fn_factory(
         # ne ovat kuitenkin takaperin katsottuna samassa järjestyksessä.
         for layer in range(2, len(weights) + 1):
             z = z_vectors[-layer]
-            activation_derivative_value = activation_function_derivative(z)
+            activation_derivative_value = activation_function.derivative(z)
             delta = np.dot(
                 weights[-layer + 1].transpose(), delta
             ) * activation_derivative_value

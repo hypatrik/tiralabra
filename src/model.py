@@ -1,7 +1,7 @@
 """Neuroverkko."""
 
 import numpy as np
-from activation_funtions import activation_function_factory
+from activation_funtions import Sigmoid
 
 from sgd import stochastic_gradient_descent_fn, update_fn_factory
 from backpropagation import backpropagation_fn_factory
@@ -16,7 +16,7 @@ class NeuralNetwork:
     helpon rajapinnan neuroverkon opettamiseen.
     """
 
-    def __init__(self, layers, activation_function="sigmoid") -> None:
+    def __init__(self, layers, activation_function=Sigmoid()) -> None:
         """
         Konstruktori.
 
@@ -33,10 +33,10 @@ class NeuralNetwork:
         weights, biases = init_weights_and_biases(layers)
         self.weights = weights
         self.biases = biases
-        af, afd = activation_function_factory(activation_function)
-        self.activation_function = af
+
+        self.activation_function = activation_function
         backpropagation_fn = backpropagation_fn_factory(
-            activation_function=af, activation_function_derivative=afd
+            activation_function=activation_function
         )
         self.sgd = stochastic_gradient_descent_fn(
             update_fn=update_fn_factory(backpropagation_fn=backpropagation_fn)
@@ -73,7 +73,6 @@ class NeuralNetwork:
             batch_size=batch_size,
         )
 
-
         evaluations = []
         # stokastine gradientti menetelmä palauttaa generaattorin, joilloin päästään
         # väliin tekemään evaluointi
@@ -87,9 +86,9 @@ class NeuralNetwork:
                 [self.predict(x)[0] == y for x, y in zip(X_val, y_val)]
             )
             print("Predicted {}/{}".format(correct_predictions_count, len(X_val)))
-            
+
             evaluations.append(correct_predictions_count / len(X_val))
-            
+
         return evaluations
 
     def predict(self, x):
@@ -114,5 +113,5 @@ class NeuralNetwork:
 
     def _feedforward(self, a):
         for b, w in zip(self.biases, self.weights):
-            a = self.activation_function(calculate_z(a, w, b))
+            a = self.activation_function.activation(calculate_z(a, w, b))
         return a
