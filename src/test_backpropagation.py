@@ -2,17 +2,11 @@ import numpy as np
 
 from backpropagation import backpropagation_fn_factory
 
-def identity(x):
-    return x
-
-def identity_derivative(x):
-    return np.ones_like(x)
-
 # Luodaan backpropagation funktio yksinkertaisemmalla aktivoinnilla
 # helpottaaksemme testaamista
 backpropagation = backpropagation_fn_factory(
-    activation_function=identity,
-    activation_function_derivative=identity_derivative,
+    activation_function=lambda x: x,
+    activation_function_derivative=lambda x: np.ones_like(x),
 )
 
 def test_backpropagation_shapes():
