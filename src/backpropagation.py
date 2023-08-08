@@ -1,3 +1,11 @@
+"""
+Vastavirta-algoritmi on neuroverkon oppimisen kovaa ydintä.
+
+Lisää funktioiden kommenteissa.
+
+Funktiot toteutettu käymällä "curring"-tekniikkaa, jotta riippuvuudet voidaan
+injektoida. Näin yksikkötestaaminen helpottuu.
+"""
 import numpy as np
 
 from activation_funtions import sigmoid, sigmoid_derivative
@@ -15,9 +23,11 @@ def backpropagation_fn_factory(
 
     https://tim.jyu.fi/view/143092#lis%C3%A4tietoa-aktivointifunktioista
 
-    Tavoitteena on minimoida opetusesimerkkijoukkoa vastaava virhefunktio ja löytää minimointia vastaavat painot neuroneille.
+    Tavoitteena on minimoida opetusesimerkkijoukkoa vastaava virhefunktio ja löytää
+    minimointia vastaavat painot neuroneille.
 
-    Osittaisderivaatat ja jokaisen neuronin vaikutus virheeseen lasketaan usein vastavirta-algoritmilla (backpropagation).
+    Osittaisderivaatat ja jokaisen neuronin vaikutus virheeseen lasketaan usein
+    vastavirta-algoritmilla (backpropagation).
 
     Args:
         X (numpy array): Kuvien vektorit
@@ -63,12 +73,15 @@ def backpropagation_fn_factory(
         # ja L taso on jo laskettu, joten haluamme laskea gradientit 1...L-1
         # Jos ||L|| = 4, niin z-vektorin koko on 3 (indeksit 0, 1 ja 2). Koska 2 on jo laskettu
         # tarvitsee laskea 1 ja 0. Siis
-        for l in range(2, len(weights) + 1):
+        # Tässä käytetään hyväksi Python kielen negatiivisia taulukko indeksejä.
+        # Koska gradientit, painot, vakiot ja aktivoinnit ovat eri kokoisia,
+        # ne ovat kuitenkin takaperin katsottuna samassa järjestyksessä.
+        for layer in range(2, len(weights) + 1):
             delta = np.dot(
-                weights[-l + 1].transpose(), delta
-            ) * activation_function_derivative(z_vectors[-l])
-            gradients_bias[-l] = delta
-            gradients_weights[-l] = np.dot(delta, a_vectors[-l - 1].transpose())
+                weights[-layer + 1].transpose(), delta
+            ) * activation_function_derivative(z_vectors[-layer])
+            gradients_bias[-layer] = delta
+            gradients_weights[-layer] = np.dot(delta, a_vectors[-layer - 1].transpose())
 
         return gradients_weights, gradients_bias
 

@@ -75,11 +75,11 @@ def activation_function_factory(function_name):
     Args:
         function_name (string): sigmoid, relu, step
     """
-    
+
     try:
         f = globals()[function_name]
         fd = globals()["{}_derivative".format(function_name)]
-        
+
         return f, fd
     except:
         raise NoSuchActivationFunctionException("No such activation function")

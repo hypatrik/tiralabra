@@ -1,5 +1,17 @@
+"""
+Stokastinen gradienttimenetelmä.
+
+Gradienttimenetelmää käytetään funktion minimin etsintään.
+Lisää gradienttimenetelmästä täällä https://tim.jyu.fi/view/143092#gradienttimenetelma.
+
+
+Stokastinen gradienttimetelmässä opetusdata pilkotaan pienempiin osajoukkoihin.
+https://tim.jyu.fi/view/143092#stokastinen-gradienttimenetelm%C3%A4
+
+Funktiot toteutettu käymällä "curring"-tekniikkaa, jotta riippuvuudet voidaan
+injektoida. Näin yksikkötestaaminen helpottuu.
+"""
 import random
-import numpy as np
 
 from utilities import split_every, zero_weight_and_bias_vectors
 from backpropagation import backpropagation_fn_factory
@@ -36,6 +48,7 @@ def update_fn_factory(backpropagation_fn=backpropagation_fn_factory()):
         return weights, biases
 
     return update
+
 
 def stochastic_gradient_descent_fn(
     update_fn=update_fn_factory(),
