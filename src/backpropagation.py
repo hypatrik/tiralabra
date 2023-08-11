@@ -8,13 +8,13 @@ injektoida. Näin yksikkötestaaminen helpottuu.
 """
 import numpy as np
 
-from cost_functions import quadratic_cost_function_derivative
+from cost_functions import cross_entropy_cost_derivative
 from utilities import calculate_z, zero_weight_and_bias_vectors
 
 
 def backpropagation_fn_factory(
     activation_function,
-    cost_function_derivative=quadratic_cost_function_derivative,
+    cost_function_derivative=cross_entropy_cost_derivative,
 ):
     """
     Vastavirta-algoritmi (backpropagation).

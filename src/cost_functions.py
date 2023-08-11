@@ -1,13 +1,11 @@
 """Virhefunktio joita käytetään minimoimisessa."""
 
 
-def quadratic_cost_function_derivative(a, y):
+def cross_entropy_cost_derivative(a, y):
     """
-    Neliöllisen virhefunktion (Mean squared error) osittaisderivaatan vastaluku.
-
-    MSE => C = 1/2 * ||y - a||²
-    ja derivaatta on
-    ∇yC = y - a
+    Cross-Entropy virhefunktion derivaatta
+    
+    http://neuralnetworksanddeeplearning.com/chap3.html#the_cross-entropy_cost_function
 
     Params:
     a (np-array): Ulos menevät aktivoinnit.
