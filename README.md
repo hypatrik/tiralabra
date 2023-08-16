@@ -1,6 +1,6 @@
 # Helsingin yliopiston Aineopintojen harjoitustyö: Tietorakenteet ja algoritmit
 
-![Yksikkötestit](https://github.com/hypatrik/tiralabra/workflows/Tests/badge.svg) [![codecov](https://codecov.io/gh/hypatrik/tiralabra/branch/main/graph/badge.svg)](https://codecov.io/gh/hypatrik/tiralabra)
+![Yksikkötestit](https://github.com/hypatrik/tiralabra/workflows/Tests/badge.svg) [![codecov](https://codecov.io/gh/hypatrik/tiralabra/graph/badge.svg?token=7ZZPBK2MC3)](https://codecov.io/gh/hypatrik/tiralabra)
 
 
 **Tekijä**: Patrik Keinonen

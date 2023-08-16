@@ -10,6 +10,7 @@ lint:
 	poetry run flake8 $(SRC_DIR)/*.py
 
 test:
-	poetry run coverage run -m pytest src/test_*.py
-	poetry run coverage report --show-missing
+	poetry run pytest --cov=. src/test_*.py
 
+test-ci:
+	poetry run pytest --cov=. --cov-report=xml src/test_*.py
