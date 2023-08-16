@@ -6,3 +6,5 @@
 
 ## Dokumentit
 * [Määrittelydokumentti](m%C3%A4%C3%A4rittelydokumentti.md)
+* [Testausraportti](testausraportti.md)
+* [Toteutusraportti](toteusraportti.md)

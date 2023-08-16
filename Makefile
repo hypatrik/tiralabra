@@ -11,4 +11,5 @@ lint:
 
 test:
 	poetry run coverage run -m pytest src/test_*.py
-	coverage report --show-missing
+	poetry run coverage report --show-missing
+
