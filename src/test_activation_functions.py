@@ -72,7 +72,7 @@ def test_tanh():
     assertAlmostEqual(result[2], -0.7615941559557649)
     # todella suuret arvot ~1
     assertAlmostEqual(result[3], 1)
-    # todella pienet arvot ~0
+    # todella pienet arvot ~-1
     assertAlmostEqual(result[4], -1)  
     
 def test_tanh_derivative():

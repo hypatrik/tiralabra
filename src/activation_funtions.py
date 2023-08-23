@@ -52,6 +52,8 @@ class Tanh:
 
     def activation(self, x):
         """Tanh funktio.
+        
+        Tanh antaa arvoja välillä -1 ja 1. Se muistuttaa muodoltaan Sigmoidia.
 
         Args:
             x (np.array)

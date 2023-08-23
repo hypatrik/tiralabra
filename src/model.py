@@ -79,13 +79,13 @@ class NeuralNetwork:
         for w, b, epoch in sgd:
             self.weights = w
             self.biases = b
-            print("Epoch {} done".format(epoch))
 
             # Evaluoidaan mallin tarkkuus jokaisen epoch jälkeen
             correct_predictions_count = np.sum(
                 [self.predict(x)[0] == y for x, y in zip(X_val, y_val)]
             )
-            print("Predicted {}/{}".format(correct_predictions_count, len(X_val)))
+            
+            print("Epoch {} done -> Predicted {}/{}".format(epoch, correct_predictions_count, len(X_val)))
 
             evaluations.append(correct_predictions_count / len(X_val))
 
