@@ -28,7 +28,7 @@ Opetus tapahtuu `NeuralNetwork` luokan `fit` instanssimetodilla. Jokainen opetus
 
 Aktivointifunktioden vertailu on tehty [neural_network.ipynb](src/neural_network.ipynb) Jupyter notebookissa. Notebook aukeaa renderöitynä tulosten kanssa Githubissa. Notebook pitää sisällään eri aktivointifunktioden suorituskykyvertailut.
 
-## Työn mahdolliset puutteet ja parannusehdotukset
+## Työn mahdolliset puutteet ja jatkokehitys
 
 Mielestäni työni laajuus on kurssille sopiva. Paras tulokseni on 0.9646. Mikäli tätä halutaan parantaa ja kurssi olisi esim 10op laajuinen, olisi jatkokehitettävää hyvinkin paljon. Esim:
 1. opettamisen lopettaminen riittävän aikaisin (early stopping)
